@@ -1,0 +1,30 @@
+version: '3.8'
+services:
+  db:
+    image: postgres:13
+    env_file:
+      - .env
+    volumes:
+      - student_course_database_volume:/var/lib/postgresql/data
+    healthcheck:
+        test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_PASSWORD}"]
+        interval: 5s
+        timeout: 5s
+        retries: 5
+  app:
+    build: .
+    image: my-fastapi-app-new
+    depends_on:
+         db:
+            condition: service_healthy
+    environment:
+      DB_HOST: db
+      DB_PORT: "5432"
+      DB_USERNAME: ${DB_USERNAME}
+      DB_PASSWORD: ${DB_PASSWORD}
+      DB_DATABASE: ${DB_DATABASE}
+    ports:
+      - "8000:8000"
+
+volumes:
+  student_course_database_volume:

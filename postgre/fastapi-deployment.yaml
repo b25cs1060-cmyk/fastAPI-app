@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fastapi-deployment
+  labels:
+    name: fastapi-deployment
+    app: fastapi
+spec:
+  replicas: 3
+  selector: 
+    matchLabels: 
+     name: fastapi-pod
+     app: fastapi
+  template: 
+    metadata:
+      name: fastapi-pod
+      labels:
+        name: fastapi-pod
+        app: fastapi
+    spec:
+      containers:
+        - name: fastapi-docker-image
+          image: my-fastapi-app-new
+          imagePullPolicy: Never
+          env:
+           - name: DATABASE_URL
+             value: "postgresql://postgres:Micdrop7!@postgres-service:5432/postgres"
+          ports:
+           - containerPort: 8000
+  
+
+
+
