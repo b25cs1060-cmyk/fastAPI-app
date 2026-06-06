@@ -1,0 +1,4 @@
+apiVersion: v2
+name: my-fastapi-app
+version: "1.0.0"
+description: "this is an api inference"

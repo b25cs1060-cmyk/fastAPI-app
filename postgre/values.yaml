@@ -1,0 +1,37 @@
+fastapi:
+  image_name: fastapi-docker-image
+  image: my-fastapi-app-new
+  replicaCount: 3
+  ports:
+    targetPort: 8000
+    port: 8000
+    containerPort: 8000
+    protocol: TCP
+  resources:
+    requests:
+      cpu: "100m"
+      memory: "128Mi"
+    limits:
+      cpu: "500m"
+      memory: "512Mi"
+  deployment-name: fastapi-deployment
+  service-name: fastapi-service
+  pod-name: fastapi-pod
+
+postgres:
+  image_name: postgres-db-1
+  image: postgres:13
+  replicaCount: 1
+  ports:
+    targetPort: 5432
+    port: 5432
+    containerPort: 5432
+    protocol: TCP
+  deployment-name: postgre-deployment
+  service-name: postgres-service
+  pod-name: postgres-pod
+  env:
+    name_value: b25cs1060
+    password_value:  Micdrop7!
+    postgres-db-value: student_course_database
+
