@@ -4,19 +4,19 @@ metadata:
   name: {{.Values.postgres.deployment-name}}
   labels:
     name: {{.Values.postgres.deployment-name}}
-    app: {{.Charts.Name}}
+    app: {{.Chart.Name}}
 spec:
   replicas: {{.Values.postgres.replicaCount}}
   selector:
     matchLabels:
      name: {{.Values.postgres.pod-name}}
-     app: {{.Charts.Name}}
+     app: {{.Chart.Name}}
   template:
     metadata:
       name: {{.Values.postgres.pod-name}}
       labels:
         name: {{.Values.postgres.pod-name}}
-        app: {{.Charts.Name}}
+        app: {{.Chart.Name}}
     spec:
       containers:
         - name: {{.Values.postgres.image_name}}

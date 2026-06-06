@@ -4,12 +4,12 @@ metadata:
   name: {{.Values.fastapi.service-name}}
   labels:
     name: {{.Values.fastapi.service-name}}
-    app: {{.Charts.Name}}
+    app: {{.Chart.Name}}
 spec:
   type: ClusterIP
   selector:
     name: {{.Values.fastapi.pod-name}}
-    app: {{.Charts.Name}}
+    app: {{.Chart.Name}}
   ports:
     - port: {{.Values.fastapi.ports.port}}
       targetPort: {{.Values.fastapi.ports.targetPort}}

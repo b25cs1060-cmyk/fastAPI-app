@@ -4,12 +4,12 @@ metadata:
   name: {{.Values.postgres.service-name}}
   labels:
     name: {{.Values.postgres.service-name}}
-    app: {{.Charts.Name}}
+    app: {{.Chart.Name}}
 spec:
   type: ClusterIP
   selector:
     name: {{.Values.postgres.pod-name}}
-    app: {{.Charts.Name}}
+    app: {{.Chart.Name}}
   ports:
     - port: {{.Values.postgres.ports.port}}
       targetPort: {{.Values.postgres.ports.targetPort}}
