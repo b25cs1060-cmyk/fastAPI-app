@@ -1,21 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{.Values.fastapi.deployment-name}}
+  name: {{.Values.fastapi.deployment_name}}
   labels: 
-    name: {{.Values.fastapi.deployment-name}}
+    name: {{.Values.fastapi.deployment_name}}
     app: {{.Chart.Name}}
 spec:
   replicas: {{.Values.fastapi.replicaCount}}
   selector: 
     matchLabels: 
-     name: {{.Values.fastapi.pod-name}}
+     name: {{.Values.fastapi.pod_name}}
      app: {{.Chart.Name}}
   template: 
     metadata:
-      name: {{.Values.fastapi.pod-name}}
+      name: {{.Values.fastapi.pod_name}}
       labels:
-        name: {{.Values.fastapi.pod-name}}
+        name: {{.Values.fastapi.pod_name}}
         app: {{.Chart.Name}}
     spec:
       containers:
