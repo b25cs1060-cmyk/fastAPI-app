@@ -23,11 +23,11 @@ spec:
           image: {{.Values.postgres.image}}
           env:
             - name: POSTGRES_USER
-              value: b25cs1060
+              value: {{.Values.postgres.env.name_value}}
             - name: POSTGRES_PASSWORD
-              value: Micdrop7!
+              value: {{.Values.postgres.env.password_value}}
             - name: POSTGRES_DB
-              value: student_course_database
+              value: {{.Values.postgres.env.postgres-db-value}}
           ports:
             - containerPort: {{.Values.postgres.ports.containerPort}}
  
