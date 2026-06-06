@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{.Values.postgres.deployment-name}}
+  labels:
+    name: {{.Values.postgres.deployment-name}}
+    app: {{.Charts.Name}}
+spec:
+  replicas: {{.Values.postgres.replicaCount}}
+  selector:
+    matchLabels:
+     name: {{.Values.postgres.pod-name}}
+     app: {{.Charts.Name}}
+  template:
+    metadata:
+      name: {{.Values.postgres.pod-name}}
+      labels:
+        name: {{.Values.postgres.pod-name}}
+        app: {{.Charts.Name}}
+    spec:
+      containers:
+        - name: {{.Values.postgres.image_name}}
+          image: {{.Values.postgres.image}}
+          env:
+            - name: POSTGRES_USER
+              value: b25cs1060
+            - name: POSTGRES_PASSWORD
+              value: Micdrop7!
+            - name: POSTGRES_DB
+              value: student_course_database
+          ports:
+            - containerPort: {{.Values.postgres.ports.containerPort}}
+ 

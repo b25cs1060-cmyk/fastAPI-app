@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{.Values.fastapi.deployment-name}}
+  labels: 
+    name: {{.Values.fastapi.deployment-name}}
+    app: {{.Charts.Name}}
+spec:
+  replicas: {{.Values.fastapi.replicaCount}}
+  selector: 
+    matchLabels: 
+     name: {{.Values.fastapi.pod-name}}
+     app: {{.Charts.Name}}
+  template: 
+    metadata:
+      name: {{.Values.fastapi.pod-name}}
+      labels:
+        name: {{.Values.fastapi.pod-name}}
+        app: {{.Charts.Name}}
+    spec:
+      containers:
+        - name: {{.Values.fastapi.image_name}}
+          image: {{.Values.fastapi.image}}
+          imagePullPolicy: Never
+          resources:
+            requests:
+              cpu: {{.Values.fastapi.resources.requests.cpu}}
+              memory: {{.Values.fastapi.resources.requests.memory}}
+            limits:
+              cpu: {{.Values.fastapi.resources.limits.cpu}}
+              memory: {{.Values.fastapi.resources.limits.memory}}
+          env:
+           - name: DATABASE_URL
+             value: "postgresql://postgres:Micdrop7!@postgres-service:5432/postgres"
+          ports:
+           - containerPort: {{.Values.fastapi.ports.containerPort}}
+  
+
+
+
