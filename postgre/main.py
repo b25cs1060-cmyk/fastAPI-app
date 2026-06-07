@@ -1,10 +1,12 @@
 from fastapi import FastAPI, Depends
 from database import Base, SessionLocal, engine
+from prometheus_fastapi_instrumentator import Instrumentator
 from model import (courses,students,courses_data,students_data,student_data_response,update_student_data,
 )
 from sqlalchemy.orm import Session
 import model
 app = FastAPI()
+Instrumentator().instrument(app).expose(app)
 def get_db():
     db = SessionLocal()
     try:

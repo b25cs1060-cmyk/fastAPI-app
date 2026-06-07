@@ -2,6 +2,7 @@ FROM python:3.11-slim
 WORKDIR /app/
 COPY requirements.txt ./
 RUN python -m pip install -r requirements.txt
+RUN pip install prometheus-fastapi-instrumentator
 COPY database.py main.py model.py ./
 ENV APP_PORT=8000
 EXPOSE 8000
