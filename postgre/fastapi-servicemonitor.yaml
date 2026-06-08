@@ -1,0 +1,21 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: fastapi-servicemonitor
+  namespace: monitoring
+  labels:
+    app: my-fastapi-app
+    release: prometheus-created
+spec:
+  namespaceSelector:
+    matchNames:
+      - default
+  selector:
+    matchLabels:
+      app: my-fastapi-app
+      name: fastapi-service
+  endpoints:
+  - port: http-metrics
+    path: /metrics
+    interval: 5s
+    
