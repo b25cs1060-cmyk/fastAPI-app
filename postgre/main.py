@@ -1,4 +1,4 @@
-from fastapi import FastAPI, Depends
+from fastapi import FastAPI, Depends, HTTPException
 from database import Base, SessionLocal, engine
 from prometheus_fastapi_instrumentator import Instrumentator
 from model import (courses,students,courses_data,students_data,student_data_response,update_student_data,
@@ -18,6 +18,16 @@ model.Base.metadata.create_all(bind=engine)
 
 @app.post("/create_student", response_model=student_data_response)
 def create_student(student: students_data, db: Session = Depends(get_db)):
+    course = db.query(courses).filter(
+        courses.course_code == student.course_enrolled
+    ).first()
+
+    if not course:
+        raise HTTPException(
+            status_code=404,
+            detail="You entered a courseID which is not already existing. Please recheck or create the course first."
+        )
+    
     new_student = students(
         student_id=student.student_id,
         student_name=student.student_name,
